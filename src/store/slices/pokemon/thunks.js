@@ -4,7 +4,7 @@ import { setPokemons, startLoadingPokemons } from './pokemonSlice';
 
 export const getPokemons = ( page = 0 ) => {
 
-    return async ( dispatch, getState ) => {
+    return async( dispatch, getState ) => {
         
         dispatch( startLoadingPokemons() );
 
@@ -14,8 +14,8 @@ export const getPokemons = ( page = 0 ) => {
         // const data = await resp.json();
         // console.log(data);
 
-        const resp = await pokemonApi.get(`/pokemon?limit=10&offset=${ page * 10 }`);
-        console.log(resp);
+        const { data } = await pokemonApi.get(`/pokemon?limit=10&offset=${ page * 10 }`);
+        // console.log(resp);
 
         dispatch( setPokemons({ pokemons: data.results, page: page + 1 }) );
     }
